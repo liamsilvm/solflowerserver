@@ -5,10 +5,18 @@ const port = 3000
 
 // app.use(cors)
 
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*, www.example.com, example.com, www.example.com.s3-website.us-east-2.amazonaws.com');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
+    next();
+  });
+  
 require('dotenv').config()
 const mysql = require('mysql2')
 const connection = mysql.createConnection(process.env.DATABASE_URL)
 console.log('Connected to PlanetScale!')
+
 
 
 connection.connect((err) => { 
